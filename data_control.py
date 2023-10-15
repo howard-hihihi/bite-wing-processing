@@ -55,6 +55,7 @@ def add_modify_image(image, folder_path, image_name):
 
     image_path = os.path.join(folder_path, image_name)
     if os.path.exists(image_path):
+        os.remove(image_path)
         name, ext = os.path.splitext(image_name)
         name = name.split('_')[0]
         new_name = f'{name}_12{ext}'
