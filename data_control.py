@@ -25,8 +25,9 @@ def change_name(root):
         labels_list = os.listdir(labels_path_list[i])
         # images_list.sort(key=lambda x: int(x.split("_")[0]))
         # labels_list.sort(key=lambda x: int(x.split("_")[0]))
-        images_list = sorted(images_list, key=lambda x: int(x.split("_")[0])) # x 代表 images_list 的 elements
-        labels_list = sorted(labels_list, key=lambda x: int(x.split("_")[0]))
+        # images_list = sorted(images_list, key=lambda x: int(x.split("_")[0])) # x 代表 images_list 的 elements
+        # labels_list = sorted(labels_list, key=lambda x: int(x.split("_")[0]))
+
 
         for j in range(len(images_list)):
             k = 1
@@ -56,16 +57,28 @@ def add_modify_image(image, folder_path, image_name):
     image_path = os.path.join(folder_path, image_name)
     if os.path.exists(image_path):
         os.remove(image_path)
+        if image_name[0] != 'a':
+            image_name = 'a' + image_name
         name, ext = os.path.splitext(image_name)
         name = name.split('_')[0]
-        new_name = f'{name}_12{ext}'
+        new_name = f'{name}_1{ext}'
         new_image_path = os.path.join(folder_path, new_name)
         cv2.imwrite(new_image_path, image)
         print("new_name: ", new_name)
     else:
         print(f'**** Did not find original image "{image_name}"')
-        
 
+# 將所有 image、label 複製一份
+# shutil.copy("要複製的檔名", "要複製到的路徑")
+# shutil.copy("要複製的黨名路徑", "要貼上的路徑")
+def modify_label_name(train_label_path, label_name):
+    label_path = os.path.join(train_label_path, label_name)
+    if os.path.exists(label_path):
+        if label_name[0] != 'a':
+            label_name = 'a' + label_name
+        new_label_name = f'{label_name.split("_")[0]}_1.txt'
+        new_label_path = os.path.join(train_label_path, new_label_name)
+        os.rename(label_path, new_label_path)
 
 
 if __name__ == "__main__":

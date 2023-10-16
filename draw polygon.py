@@ -2,16 +2,8 @@ import cv2
 import numpy as np
 import os
 from data_control import add_modify_image
+from data_control import modify_label_name
 
-# 將所有 image、label 複製一份
-# shutil.copy("要複製的檔名", "要複製到的路徑")
-# shutil.copy("要複製的黨名路徑", "要貼上的路徑")
-def modify_label_name(train_label_path, label_name):
-    label_path = os.path.join(train_label_path, label_name)
-    if os.path.exists(label_path):
-        new_label_name = label_name.split("_")[0] + f'_12.txt'
-        new_label_path = os.path.join(train_label_path, new_label_name)
-        os.rename(label_path, new_label_path)
 
 # 獲取多邊形的各個點，轉成 <class 'numpy.ndarray'>
 def get_pts_list(pts, width, height):
@@ -51,11 +43,13 @@ def processing_image(image, pts_list):
 # 讀取 images、labels
 train_images_path = "dataset/train/images"
 train_labels_path = "dataset/train/labels"
-train_images_list = sorted(os.listdir(train_images_path), key=lambda x: int(x.split("_")[0]))
-train_labels_list = sorted(os.listdir(train_labels_path), key=lambda x: int(x.split("_")[0]))
+# train_images_list = sorted(os.listdir(train_images_path), key=lambda x: int(x.split("_")[0]))
+# train_labels_list = sorted(os.listdir(train_labels_path), key=lambda x: int(x.split("_")[0]))
+train_images_list = os.listdir(train_images_path)
+train_labels_list = os.listdir(train_labels_path)
 print(train_images_list, train_labels_list)
 
-# print(f'my image processing is loading: [', end='')
+
 for i in range(len(train_images_list)):
     image_path = os.path.join(train_images_path, train_images_list[i])
     label_path = os.path.join(train_labels_path, train_labels_list[i])
@@ -75,7 +69,7 @@ for i in range(len(train_images_list)):
 
     add_modify_image(image_2, train_images_path, train_images_list[i])
     modify_label_name(train_labels_path, train_labels_list[i]) 
-# print(f']')
+
 
     # 顯示照片
     # cv2.imshow('original', image_1)
