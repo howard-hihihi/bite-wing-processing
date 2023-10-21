@@ -1,24 +1,10 @@
 import cv2
 import numpy as np
 import os
-from data_control import add_modify_image
-from data_control import modify_label_name
-
-
-# 獲取多邊形的各個點，轉成 <class 'numpy.ndarray'>
-def get_pts_list(pts, width, height):
-    pts_list = []
-    for i in range(len(pts)):
-        obj_pts = pts[i]
-        for j in range(1, len(obj_pts), 2): # 因為 index = 0 , 是類別不是點的座標 , 所以從 index = 1
-            x, y = float(obj_pts[j]) * width, float(obj_pts[j+1]) * height
-            pts_list.append([x, y])
-
-    pts_list = np.array(pts_list, dtype=np.int32) # 這邊需要轉換成 <class 'numpy.ndarray'>
-    return pts_list
+import utils
 
 # 把 bite wing 部分變暗
-def processing_image(image, pts_list):
+def remove_bw(image, pts_list):
     '''
     cv2.polylines(img, pts, isClosed, color, thickness)
     # img 來源影像
@@ -38,7 +24,6 @@ def processing_image(image, pts_list):
         for y in range(min_height, max_height, 1):
             if cv2.pointPolygonTest(pts_list, (x, y), True) > 0:
                     image[y, x] *= 0.2
-
 
 # 讀取 images、labels
 train_images_path = "dataset/train/images"
@@ -63,12 +48,12 @@ for i in range(len(train_images_list)):
             instance_label = line.split(" ") # 物件標記的每個點
             pts_list.append(instance_label)
     
-    pts_list = get_pts_list(pts_list, image_width, image_height)
+    pts_list = utils.get_pts_list(pts_list, image_width, image_height)
 
-    processing_image(image_2, pts_list)
+    remove_bw(image_2, pts_list)
 
-    add_modify_image(image_2, train_images_path, train_images_list[i])
-    modify_label_name(train_labels_path, train_labels_list[i]) 
+    utils.add_modify_image(image_2, train_images_path, train_images_list[i], 'a')
+    utils.modify_label_name(train_labels_path, train_labels_list[i]) 
 
 
     # 顯示照片
