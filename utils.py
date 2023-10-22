@@ -3,6 +3,14 @@ import cv2
 import numpy as np
 import shutil
 
+def show_one_image(images_path, name_1, name_2):
+    original_image = cv2.imread(f'{images_path}/{name_1}', cv2.IMREAD_GRAYSCALE)
+    modify_image = cv2.imread(f'{images_path}/{name_2}', cv2.IMREAD_GRAYSCALE)
+    cv2.imshow("original_image", original_image)
+    cv2.imshow("modify_image", modify_image)
+    cv2.waitKey()
+    cv2.destroyAllWindows()
+
 def change_name(root):
     data_path = root
 
@@ -74,13 +82,14 @@ def add_modify_image(image, folder_path, image_name, t):
 # shutil.copy("要複製的黨名路徑", "要貼上的路徑")
 def add_modify_label(folder_path, label_name, t):
     old_label_path = os.path.join(folder_path, label_name)
-    if os.path.exists(old_label_path):
+    if not os.path.exists(old_label_path):
         if label_name[0] != t:
             label_name = t + label_name
         new_label_name = f'{label_name.split("_")[0]}_1.txt'
         new_label_path = os.path.join(folder_path, new_label_name)
-        # os.rename(old_label_path, new_label_path)
         shutil.copy(old_label_path, new_label_path)
+    else:
+        print(old_label_path, " is exists.")
 
 
 
@@ -111,3 +120,4 @@ if __name__ == "__main__":
     #     image = cv2.imread(os.path.join("temp/images", file))
     #     add_modify_image(image, "temp/images", file, 'b')
     '''===================================================='''
+    show_one_image("dataset/train/images", "2_1.jpg", "b2_1.jpg")
