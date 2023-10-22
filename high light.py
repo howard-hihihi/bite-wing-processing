@@ -32,17 +32,18 @@ def center_high(image, x, y):
     
 
 def image_processing(image, pts_list):
-    max_width, max_height = np.max(pts_list, axis=0)
-    min_width, min_height = np.min(pts_list, axis=0)
-    for x in range(min_width, max_width, 1):
-        for y in range(min_height, max_height , 1):
-            if cv2.pointPolygonTest(pts_list, (x, y), False) > 0:
-                value = grayscale_power_transform(image[y, x], 0.8)
-                if value > 255:
-                    value = 255
-                elif value < 0:
-                    value = 0
-                image[y, x] = value
+    for obj_pts in pts_list:
+        max_width, max_height = np.max(obj_pts, axis=0)
+        min_width, min_height = np.min(obj_pts, axis=0)
+        for x in range(min_width, max_width, 1):
+            for y in range(min_height, max_height , 1):
+                if cv2.pointPolygonTest(obj_pts, (x, y), False) > 0:
+                    # value = grayscale_power_transform(image[y, x], 0.8)
+                    # if value > 255:
+                    #     value = 255
+                    # elif value < 0:
+                    #     value = 0
+                    image[y, x] = 0
 
 
 
@@ -68,7 +69,7 @@ for i in range(len(images_list)):
             pts_list.append(obj) # [1, 10, 10, 20] ....
     # print(pts_list) # [[1, 10, 10, 20, 40, 30, 20], [1, 40, 30, 20, 20, 30, 20], ....]
 
-    pts_list = utils.get_pts_list(pts_list, width, height) # [[10, 10], [20, 40], [30, 20]] , .... ]
+    pts_list = utils.get_pts_list(pts_list, width, height) # [[10 10] [20 40], [30 20]] , .... ]
 
     image_processing(image, pts_list)    
 

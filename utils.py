@@ -88,12 +88,14 @@ def add_modify_label(folder_path, label_name, t):
 def get_pts_list(pts, width, height):
     pts_list = []
     for i in range(len(pts)):
+        temp = []
         obj_pts = pts[i]
         for j in range(1, len(obj_pts), 2): # 因為 index = 0 , 是類別不是點的座標 , 所以從 index = 1
-            x, y = float(obj_pts[j]) * width, float(obj_pts[j+1]) * height
-            pts_list.append([x, y])
-
-    pts_list = np.array(pts_list, dtype=np.int32) # 這邊需要轉換成 <class 'numpy.ndarray'>
+            x, y = int(float(obj_pts[j]) * width), int(float(obj_pts[j+1]) * height)
+            temp.append([x,y])
+        temp = np.array(temp, dtype=np.int32)
+        pts_list.append(temp)
+    # pts_list = np.array(pts_list, dtype=np.int32) # 這邊需要轉換成 <class 'numpy.ndarray'>
     return pts_list
 
 if __name__ == "__main__":
