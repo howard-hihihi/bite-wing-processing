@@ -1,7 +1,7 @@
 import os
 import cv2
 import numpy as np
-
+import shutil
 
 def change_name(root):
     data_path = root
@@ -72,14 +72,15 @@ def add_modify_image(image, folder_path, image_name, t):
 # 將所有 image、label 複製一份
 # shutil.copy("要複製的檔名", "要複製到的路徑")
 # shutil.copy("要複製的黨名路徑", "要貼上的路徑")
-def modify_label_name(train_label_path, label_name):
-    label_path = os.path.join(train_label_path, label_name)
-    if os.path.exists(label_path):
-        if label_name[0] != 'a':
-            label_name = 'a' + label_name
+def add_modify_label(folder_path, label_name, t):
+    old_label_path = os.path.join(folder_path, label_name)
+    if os.path.exists(old_label_path):
+        if label_name[0] != t:
+            label_name = t + label_name
         new_label_name = f'{label_name.split("_")[0]}_1.txt'
-        new_label_path = os.path.join(train_label_path, new_label_name)
-        os.rename(label_path, new_label_path)
+        new_label_path = os.path.join(folder_path, new_label_name)
+        # os.rename(old_label_path, new_label_path)
+        shutil.copy(old_label_path, new_label_path)
 
 
 
@@ -96,5 +97,15 @@ def get_pts_list(pts, width, height):
     return pts_list
 
 if __name__ == "__main__":
-    data_path = "dataset"
-    change_name(data_path)
+    # data_path = "dataset"
+    # change_name(data_path)
+    '''===================================================='''
+    # images_list = os.listdir("temp/images")
+    # labels_list = os.listdir("temp/labels")
+    # for file in labels_list:
+    #     add_modify_label("temp/labels", file, 'b')
+    # labels_list = os.listdir("temp/labels")
+    # for file in images_list:
+    #     image = cv2.imread(os.path.join("temp/images", file))
+    #     add_modify_image(image, "temp/images", file, 'b')
+    '''===================================================='''

@@ -51,13 +51,14 @@ labels_path = "dataset/train/labels"
 
 images_list = os.listdir(images_path)
 labels_list = os.listdir(labels_path)
+print(images_list)
 
 for i in range(len(images_list)):
     image_path = os.path.join(images_path, images_list[i])
     label_path = os.path.join(labels_path, labels_list[i])
 
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
-    image = cv2.equalizeHist(image)
+    # image = cv2.equalizeHist(image)
     width, height = image.shape
 
     pts_list = []
@@ -68,12 +69,8 @@ for i in range(len(images_list)):
     # print(pts_list) # [[1, 10, 10, 20, 40, 30, 20], [1, 40, 30, 20, 20, 30, 20], ....]
 
     pts_list = utils.get_pts_list(pts_list, width, height) # [[10, 10], [20, 40], [30, 20]] , .... ]
-    print(pts_list)
 
     image_processing(image, pts_list)    
 
-    cv2.imshow("image", image)
-    cv2.waitKey()
-    cv2.imwrite(f'temp/image_{i+1}.jpg', image)
-    cv2.destroyAllWindows()
-    
+    utils.add_modify_image(image, images_path, images_list[i], 'b')
+    utils.add_modify_label(labels_path, labels_list[i], 'b')    

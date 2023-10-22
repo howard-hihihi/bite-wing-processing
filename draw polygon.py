@@ -53,7 +53,7 @@ for i in range(len(train_images_list)):
     remove_bw(image_2, pts_list)
 
     utils.add_modify_image(image_2, train_images_path, train_images_list[i], 'a')
-    utils.modify_label_name(train_labels_path, train_labels_list[i]) 
+    utils.add_modify_label(train_labels_path, train_labels_list[i]) 
 
 
     # 顯示照片
