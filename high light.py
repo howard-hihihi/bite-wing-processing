@@ -39,9 +39,9 @@ def image_processing(image, pts_list):
             for y in range(image.shape[1]):
                 value = 0
                 if cv2.pointPolygonTest(obj_pts, (x, y), False) > 0:
-                    value = grayscale_power_transform(image[y, x], 0.9)
+                    value = grayscale_power_transform(image[y, x], 0.85)
                 else:
-                    value = grayscale_power_transform(image[y, x], 1.1)
+                    value = grayscale_power_transform(image[y, x], 1.15)
                 if value > 255:
                         value = 255
                 elif value < 0:
@@ -50,16 +50,18 @@ def image_processing(image, pts_list):
 
 
 
-images_path = "dataset/train/images"
-labels_path = "dataset/train/labels"
+old_images_path = "dataset/train/images"
+old_labels_path = "dataset/train/labels"
+new_images_path = "dataset_b/images"
+new_labels_path = "dataset_b/labels"
 
-images_list = os.listdir(images_path)
-labels_list = os.listdir(labels_path)
+images_list = os.listdir(old_images_path)
+labels_list = os.listdir(old_labels_path)
 print(images_list)
 
 for i in range(len(images_list)):
-    image_path = os.path.join(images_path, images_list[i])
-    label_path = os.path.join(labels_path, labels_list[i])
+    image_path = os.path.join(old_images_path, images_list[i])
+    label_path = os.path.join(old_labels_path, labels_list[i])
 
     image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
     # image = cv2.equalizeHist(image)
@@ -74,8 +76,10 @@ for i in range(len(images_list)):
 
     pts_list = utils.get_pts_list(pts_list, width, height) # [[10 10] [20 40], [30 20]] , .... ]
 
-    image_processing(image, pts_list)    
+    image_processing(image, pts_list)  
     
     print("No.", i+1)
-    utils.add_modify_image(image, images_path, images_list[i], 'b')
-    utils.add_modify_label(labels_path, labels_list[i], 'b')    
+    utils.add_modify_image(image, old_images_path, new_images_path, images_list[i], 'b')
+    utils.add_modify_label(old_labels_path, new_labels_path, labels_list[i], 'b')
+
+utils.show_one_image("dataset/train/images/a2_1.jpg", "dataset_b/images/b2_1.jpg")    

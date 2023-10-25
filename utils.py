@@ -3,9 +3,10 @@ import cv2
 import numpy as np
 import shutil
 
-def show_one_image(images_path, name_1, name_2):
-    original_image = cv2.imread(f'{images_path}/{name_1}', cv2.IMREAD_GRAYSCALE)
-    modify_image = cv2.imread(f'{images_path}/{name_2}', cv2.IMREAD_GRAYSCALE)
+def show_one_image(name_1, name_2):
+    original_image = cv2.imread(f'{name_1}', cv2.IMREAD_GRAYSCALE)
+    modify_image = cv2.imread(f'{name_2}', cv2.IMREAD_GRAYSCALE)
+    print(f'Show image {name_1} and {name_2}')
     cv2.imshow("original_image", original_image)
     cv2.imshow("modify_image", modify_image)
     cv2.waitKey()
@@ -59,19 +60,21 @@ def change_name(root):
                 os.rename(old_label_path, new_label_path)
                 print(images_list[j], '  ----> ', new_image_name)
 
-def add_modify_image(image, folder_path, image_name, t):
-    if not os.path.exists(folder_path):
-        os.makedirs(folder_path)
+def add_modify_image(image, old_folder_path, new_folder_path, image_name, v):
+    if not os.path.exists(new_folder_path):
+        os.makedirs(new_folder_path)
 
-    image_path = os.path.join(folder_path, image_name)
+    image_path = os.path.join(old_folder_path, image_name)
     if os.path.exists(image_path):
         # os.remove(image_path)
-        if image_name[0] != t:
-            image_name = t + image_name
+        if image_name[0] != v:
+            if image_name[0] == 'a':
+                image_name = 'b' + image_name[1:]
+            else:
+                image_name = v + image_name
         name, ext = os.path.splitext(image_name)
-        name = name.split('_')[0]
-        new_name = f'{name}_1{ext}'
-        new_image_path = os.path.join(folder_path, new_name)
+        new_name = f'{name.split("_")[0]}_1{ext}' # fix 
+        new_image_path = os.path.join(new_folder_path, new_name)
         cv2.imwrite(new_image_path, image)
         print("new_name: ", new_name)
     else:
@@ -80,16 +83,23 @@ def add_modify_image(image, folder_path, image_name, t):
 # 將所有 image、label 複製一份
 # shutil.copy("要複製的檔名", "要複製到的路徑")
 # shutil.copy("要複製的黨名路徑", "要貼上的路徑")
-def add_modify_label(folder_path, label_name, t):
-    old_label_path = os.path.join(folder_path, label_name)
-    if not os.path.exists(old_label_path):
-        if label_name[0] != t:
-            label_name = t + label_name
-        new_label_name = f'{label_name.split("_")[0]}_1.txt'
-        new_label_path = os.path.join(folder_path, new_label_name)
+def add_modify_label(old_folder_path, new_folder_path, label_name, v):
+    if not os.path.exists(new_folder_path):
+        os.makedirs(new_folder_path)
+        
+    old_label_path = os.path.join(old_folder_path, label_name)
+    new_label_path = os.path.join(new_folder_path, label_name)
+    if not os.path.exists(new_label_path):
+        if label_name[0] != v:
+            if label_name[0] == 'a':
+                label_name = 'b' + label_name[1:]
+            else:
+                label_name = v + label_name
+        new_label_name = f'{label_name.split("_")[0]}_1.txt' # fix 
+        new_label_path = os.path.join(new_folder_path, new_label_name)
         shutil.copy(old_label_path, new_label_path)
     else:
-        print(old_label_path, " is exists.")
+        print(new_label_path, " is exists.")
 
 
 
@@ -120,4 +130,4 @@ if __name__ == "__main__":
     #     image = cv2.imread(os.path.join("temp/images", file))
     #     add_modify_image(image, "temp/images", file, 'b')
     '''===================================================='''
-    show_one_image("dataset/train/images", "2_1.jpg", "b2_1.jpg")
+    show_one_image("dataset/train/images/a2_1.jpg", "dataset_b/images/b2_1.jpg")
