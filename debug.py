@@ -1,3 +1,2 @@
-str = "hi"
-str[0] = 'b'
-print(str)
+
+print((5**(2)) * (3**2))

@@ -3,9 +3,9 @@ import cv2
 import numpy as np
 import shutil
 
-def show_one_image(name_1, name_2):
-    original_image = cv2.imread(f'{name_1}', cv2.IMREAD_GRAYSCALE)
-    modify_image = cv2.imread(f'{name_2}', cv2.IMREAD_GRAYSCALE)
+def show_two_image(name_1, name_2):
+    original_image = cv2.imread(name_1, cv2.IMREAD_GRAYSCALE)
+    modify_image = cv2.imread(name_2, cv2.IMREAD_GRAYSCALE)
     print(f'Show image {name_1} and {name_2}')
     cv2.imshow("original_image", original_image)
     cv2.imshow("modify_image", modify_image)
@@ -69,7 +69,7 @@ def add_modify_image(image, old_folder_path, new_folder_path, image_name, v):
         # os.remove(image_path)
         if image_name[0] != v:
             if image_name[0] == 'a':
-                image_name = 'b' + image_name[1:]
+                image_name = 'c' + image_name[1:]
             else:
                 image_name = v + image_name
         name, ext = os.path.splitext(image_name)
@@ -80,7 +80,7 @@ def add_modify_image(image, old_folder_path, new_folder_path, image_name, v):
     else:
         print(f'**** Did not find original image "{image_name}"')
 
-# 將所有 image、label 複製一份
+
 # shutil.copy("要複製的檔名", "要複製到的路徑")
 # shutil.copy("要複製的黨名路徑", "要貼上的路徑")
 def add_modify_label(old_folder_path, new_folder_path, label_name, v):
@@ -92,7 +92,7 @@ def add_modify_label(old_folder_path, new_folder_path, label_name, v):
     if not os.path.exists(new_label_path):
         if label_name[0] != v:
             if label_name[0] == 'a':
-                label_name = 'b' + label_name[1:]
+                label_name = 'c' + label_name[1:]
             else:
                 label_name = v + label_name
         new_label_name = f'{label_name.split("_")[0]}_1.txt' # fix 
@@ -118,8 +118,8 @@ def get_pts_list(pts, width, height):
     return pts_list
 
 if __name__ == "__main__":
-    # data_path = "dataset"
-    # change_name(data_path)
+    data_path = "dataset"
+    change_name(data_path)
     '''===================================================='''
     # images_list = os.listdir("temp/images")
     # labels_list = os.listdir("temp/labels")
@@ -130,4 +130,4 @@ if __name__ == "__main__":
     #     image = cv2.imread(os.path.join("temp/images", file))
     #     add_modify_image(image, "temp/images", file, 'b')
     '''===================================================='''
-    show_one_image("dataset/train/images/a2_1.jpg", "dataset_b/images/b2_1.jpg")
+    # show_two_image("dataset/train/images/a2_1.jpg", "dataset_b/images/b2_1.jpg")

@@ -40,8 +40,6 @@ def image_processing(image, pts_list):
                 value = 0
                 if cv2.pointPolygonTest(obj_pts, (x, y), False) > 0:
                     value = grayscale_power_transform(image[y, x], 0.85)
-                else:
-                    value = grayscale_power_transform(image[y, x], 1.15)
                 if value > 255:
                         value = 255
                 elif value < 0:
@@ -82,4 +80,4 @@ for i in range(len(images_list)):
     utils.add_modify_image(image, old_images_path, new_images_path, images_list[i], 'b')
     utils.add_modify_label(old_labels_path, new_labels_path, labels_list[i], 'b')
 
-utils.show_one_image("dataset/train/images/a2_1.jpg", "dataset_b/images/b2_1.jpg")    
+utils.show_two_image("dataset/train/images/a2_1.jpg", "dataset_b/images/b2_1.jpg")    
