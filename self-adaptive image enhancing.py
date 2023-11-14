@@ -72,10 +72,10 @@ def image_enhance(image):
 
 
 # step 0 : Read images
-old_images_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_1\\images"
-new_images_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_c\\images"
-old_labels_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_1\\labels"
-new_labels_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_c\\labels"
+old_images_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_c\\images"
+new_images_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_d\\images"
+old_labels_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_c\\labels"
+new_labels_path = "C:\\Users\\user\\Desktop\\dataset\\dataset_d\\labels"
 images_list = os.listdir(old_images_path)
 labels_list = os.listdir(old_labels_path)
 
@@ -85,5 +85,5 @@ for i in range(len(images_list)):
     img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
     image_enhance(img)
 
-    utils.add_modify_image(img, old_images_path, new_images_path, images_list[i], "c")
-    utils.add_modify_label(old_labels_path, new_labels_path, labels_list[i], "c")
+    utils.add_modify_image(img, old_images_path, new_images_path, images_list[i], "d")
+    utils.add_modify_label(old_labels_path, new_labels_path, labels_list[i], "d")

@@ -70,6 +70,8 @@ def add_modify_image(image, old_folder_path, new_folder_path, image_name, v):
         if image_name[0] != v:
             if image_name[0] == 'a':
                 image_name = 'c' + image_name[1:]
+            elif image_name[0] == 'c':
+                image_name = 'd' + image_name[1:]
             else:
                 image_name = v + image_name
         name, ext = os.path.splitext(image_name)
@@ -93,6 +95,8 @@ def add_modify_label(old_folder_path, new_folder_path, label_name, v):
         if label_name[0] != v:
             if label_name[0] == 'a':
                 label_name = 'c' + label_name[1:]
+            elif label_name[0] == 'c':
+                label_name = 'd' + label_name[1:]
             else:
                 label_name = v + label_name
         new_label_name = f'{label_name.split("_")[0]}_1.txt' # fix 
