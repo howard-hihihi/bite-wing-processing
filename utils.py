@@ -82,7 +82,6 @@ def add_modify_image(image, old_folder_path, new_folder_path, image_name, v):
     else:
         print(f'**** Did not find original image "{image_name}"')
 
-
 # shutil.copy("要複製的檔名", "要複製到的路徑")
 # shutil.copy("要複製的黨名路徑", "要貼上的路徑")
 def add_modify_label(old_folder_path, new_folder_path, label_name, v):
@@ -104,8 +103,6 @@ def add_modify_label(old_folder_path, new_folder_path, label_name, v):
         shutil.copy(old_label_path, new_label_path)
     else:
         print(new_label_path, " is exists.")
-
-
 
 # 獲取多邊形的各個點，轉成 <class 'numpy.ndarray'>
 def get_pts_list(pts, width, height):
