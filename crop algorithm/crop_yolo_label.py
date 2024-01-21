@@ -50,14 +50,9 @@ def crop_image(image_path, annotations, output_folder):
 
 
 # 資料夾的路徑
-images_folder = 'D:\\Python Project\\dataset\\periapical film\\original size\\images' # change  "images"
-labels_folder = 'D:\\Python Project\\dataset\\periapical film\\original size\\labels' # change  "labels/yolo"
-output_folder = "D:\\Python Project\\dataset\\periapical film\\original size crop\\images"
-
-# 這個資料夾的範例
-# images_folder = 'images' 
-# labels_folder = 'labels/yolo' 
-# output_folder = "tooth_crop"
+images_folder = 'tooth_crop\\yolo\\images' 
+labels_folder = 'tooth_crop\\yolo\\labels' 
+output_folder = 'tooth_crop\\yolo\\output'
 
 os.makedirs(output_folder, exist_ok=True)
 
