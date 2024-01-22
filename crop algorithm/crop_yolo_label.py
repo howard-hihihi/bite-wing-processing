@@ -50,9 +50,9 @@ def crop_image(image_path, annotations, output_folder):
 
 
 # 資料夾的路徑
-images_folder = 'tooth_crop\\yolo\\images' 
-labels_folder = 'tooth_crop\\yolo\\labels' 
-output_folder = 'tooth_crop\\yolo\\output'
+images_folder = r'C:\Users\user\Desktop\dataset\periapical film\Adaptive_Histogram_Equalization\original' 
+labels_folder = r'C:\Users\user\Desktop\dataset\periapical film\original images\original size\labels' 
+output_folder = r'C:\\Users\\user\\Desktop\\dataset\\periapical film\\Adaptive_Histogram_Equalization\\original ahe crop'
 
 os.makedirs(output_folder, exist_ok=True)
 
