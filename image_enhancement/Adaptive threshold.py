@@ -2,7 +2,7 @@ import cv2
 import numpy as np
 
 # 讀取圖片
-image = cv2.imread('image_enhancement/11_original.jpg', cv2.IMREAD_GRAYSCALE)
+image = cv2.imread('image_enhancement/images/11_AHE.jpg', cv2.IMREAD_GRAYSCALE)
 height, width = image.shape
 image = cv2.resize(image, (int(width*0.5), int(height*0.5)))
 
@@ -23,4 +23,4 @@ cv2.imshow('Adaptive Threshold', adaptive_threshold)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
 
-cv2.imwrite("image_enhancement/11_AT.jpg", adaptive_threshold)
+cv2.imwrite("image_enhancement/images/11_AHE_AT.jpg", adaptive_threshold)
