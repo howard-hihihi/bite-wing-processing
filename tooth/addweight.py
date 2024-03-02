@@ -3,7 +3,7 @@ import os
 
 img_dir_1 = "tooth/images"
 img_dir_2 = "tooth/sobel"
-output_dir = "tooth/original_sobel"
+output_dir = "tooth/original_sobel_fix"
 
 os.makedirs(output_dir, exist_ok=True)
 
@@ -16,7 +16,7 @@ for name in os.listdir(img_dir_1):
     img2 = cv2.imread(img_path_2, cv2.IMREAD_GRAYSCALE)
 
 
-    img3 = cv2.subtract(img1, img2)
+    img3 = cv2.addWeighted(img1, 0.8, img2, 0.2, 0)
 
     cv2.imwrite(output_path, img3)
 

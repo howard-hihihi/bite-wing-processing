@@ -20,7 +20,7 @@ def boundary_tracing(image):
     return boundary_points
 
 # 讀取灰階照片
-image_path = r"C:\Users\user\Desktop\dataset\periapical film\Adaptive_Histogram_Equalization\640 x 640 crop\11_1.jpg"  # 將路徑替換為你的照片路徑
+image_path = r'C:\Users\user\Desktop\image processing\tooth\37_jpg.rf.5a5961a0c22de152085aa353d497a25b.jpg'  # 將路徑替換為你的照片路徑
 gray_image = cv2.imread(image_path, cv2.IMREAD_GRAYSCALE)
 # gray_image = cv2.resize(gray_image, (gray_image.shape[1]//2, gray_image.shape[0]//2))
 

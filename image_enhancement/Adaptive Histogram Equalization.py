@@ -5,10 +5,10 @@ import os
 import cv2
 import matplotlib.pyplot as plt
 
-img_dir = "image_enhancement/images"
-output_dir = "image_enhancement/images"
+img_dir = "tooth"
+output_dir = "output_images"
 
-# os.makedirs(output_dir, exist_ok=True)
+os.makedirs(output_dir, exist_ok=True)
 
 for name in os.listdir(img_dir):
     img_path = os.path.join(img_dir, name)
@@ -26,21 +26,21 @@ for name in os.listdir(img_dir):
     # 適應性直方圖均衡化
     clahe_img = clahe.apply(filtered_image)
 
-    # cv2.imwrite(output_path, clahe_img)
+    cv2.imwrite(output_path, clahe_img)
     # print(f'save image "{output_path}"')
 
     # # 顯示原始與增強後的影像
-    plt.figure(figsize=(10, 6))
-    plt.subplot(1, 3, 1)
-    plt.imshow(img, cmap='gray')
-    plt.title('Original Image')
+    # plt.figure(figsize=(10, 6))
+    # plt.subplot(1, 3, 1)
+    # plt.imshow(img, cmap='gray')
+    # plt.title('Original Image')
 
-    plt.subplot(1, 3, 2)
-    plt.imshow(img, cmap='gray')
-    plt.title('medianBlur Image')
+    # plt.subplot(1, 3, 2)
+    # plt.imshow(img, cmap='gray')
+    # plt.title('medianBlur Image')
 
-    plt.subplot(1, 3, 3)
-    plt.imshow(clahe_img, cmap='gray')
-    plt.title('CLAHE Image')
+    # plt.subplot(1, 3, 3)
+    # plt.imshow(clahe_img, cmap='gray')
+    # plt.title('CLAHE Image')
 
-    plt.show()
+    # plt.show()
