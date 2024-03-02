@@ -40,11 +40,10 @@ def aplit(image):
 
     # 計算平均值 (S~)mean
     s_mean = np.mean(normalized_image)
-    # print("--> Normalized image mean_value(s_mean): ", s_mean)
 
     # 設置 F(s) 的參數
     t_thr = 0.5
-    s_thr = s_mean * 0.1
+    s_thr = s_mean * 1.2
     s_up = np.max(normalized_image)
     s_low = np.min(normalized_image)
 
@@ -65,28 +64,28 @@ def aplit(image):
     return aplit_image
 
 '''----------------------------------------------------------------------------------------'''
-image = cv2.imread("image_enhancement/images/11_AHE.jpg", cv2.IMREAD_GRAYSCALE)
-image = cv2.resize(image, (image.shape[1]//2, image.shape[0]//2))
-aplit_image = aplit(image)
+# image = cv2.imread(r"tooth\images\16_jpg.rf.244fb6568e74aa33f21c0016ffb2212c.jpg", cv2.IMREAD_GRAYSCALE)
+# image = cv2.resize(image, (image.shape[1]//2, image.shape[0]//2))
+# aplit_image = aplit(image)
 
-## (t_thr, s_thr) = (0.5, 1) = (0.3, s_mean * 1.0)
-# cv2.imwrite("image_enhancement/images/11_AHE_APLIT(0.5, 1).jpg", aplit_image)
-cv2.imshow("APLIT", aplit_image)
-cv2.imshow("image", image)
-cv2.waitKey()
-cv2.destroyAllWindows()
+# ## (t_thr, s_thr) = (0.5, 1) = (0.3, s_mean * 1.0)
+# # cv2.imwrite("image_enhancement/images/11_AHE_APLIT(0.5, 1).jpg", aplit_image)
+# cv2.imshow("APLIT", aplit_image)
+# cv2.imshow("image", image)
+# cv2.waitKey()
+# cv2.destroyAllWindows()
 '''----------------------------------------------------------------------------------------'''
-## original size (t_thr, s_thr)
-# save_dir = "C:\\Users\\user\\Desktop\\dataset\\periapical film\\AHE_APLIT\\original size"
-# input_dir = "C:\\Users\\user\\Desktop\\dataset\\periapical film\\original images\\original size\\images"
-# os.makedirs(save_dir, exist_ok=True)
+# original size (t_thr, s_thr)
+save_dir = r"tooth\APLIT"
+input_dir = r"tooth\images"
+os.makedirs(save_dir, exist_ok=True)
 
-# for img_name in os.listdir(input_dir):
-#     img_path = os.path.join(input_dir, img_name)
-#     save_path = os.path.join(save_dir, img_name)
-#     img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+for img_name in os.listdir(input_dir):
+    img_path = os.path.join(input_dir, img_name)
+    save_path = os.path.join(save_dir, img_name)
+    img = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
 
-#     aplit_img = aplit(img)
+    aplit_img = aplit(img)
 
-#     cv2.imwrite(save_path, aplit_img)
-#     print("save", save_path)
+    cv2.imwrite(save_path, aplit_img)
+    # print("save", save_path)

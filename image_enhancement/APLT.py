@@ -22,43 +22,43 @@ def adaptive_power_law_transform(img, window_size):
     return result_img
 
 '''---------------------------------------------------------------------------------'''
-window_size = 1
-for i in range(1):
-    # 讀取圖像
-    image = cv2.imread('image_enhancement/images/11_original.jpg', cv2.IMREAD_GRAYSCALE)
-    image = cv2.resize(image, (image.shape[1]//4, image.shape[0]//4))
+# window_size = 1
+# for i in range(1):
+#     # 讀取圖像
+#     image = cv2.imread('image_enhancement/images/11_original.jpg', cv2.IMREAD_GRAYSCALE)
+#     image = cv2.resize(image, (image.shape[1]//4, image.shape[0]//4))
 
-    # 設定窗口大小
-    window_size += 6
-    print("window: ", window_size)
-    # 執行自適應冪律轉換
-    aplt_image = adaptive_power_law_transform(image, window_size)
-    cv2.imwrite("image_enhancement/images/11_APLT_ws7.jpg", aplt_image)
+#     # 設定窗口大小
+#     window_size += 6
+#     print("window: ", window_size)
+#     # 執行自適應冪律轉換
+#     aplt_image = adaptive_power_law_transform(image, window_size)
+#     cv2.imwrite("image_enhancement/images/11_APLT_ws7.jpg", aplt_image)
 
-    # 顯示原始和增強後的圖像
-    cv2.imshow('Original Image', image)
-    cv2.imshow('APLT Image', aplt_image)
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
+#     # 顯示原始和增強後的圖像
+#     cv2.imshow('Original Image', image)
+#     cv2.imshow('APLT Image', aplt_image)
+#     cv2.waitKey(0)
+#     cv2.destroyAllWindows()
 '''---------------------------------------------------------------------------------'''
 
 # 儲存照片
-# import os
+import os
 
-# input_dir = r"C:\Users\user\Desktop\dataset\periapical film\original images\original size\temp"
-# save_dir = r"C:\Users\user\Desktop\dataset\periapical film\APLT"
-# window_size = 5
+input_dir = "tooth/images"
+save_dir = "tooth/APLT"
+window_size = 5
 
-# os.makedirs(save_dir)
+os.makedirs(save_dir)
 
-# for img_name in os.listdir(input_dir):
-#     img_path = os.path.join(input_dir, img_name)
-#     save_path = os.path.join(save_dir, img_name)
+for img_name in os.listdir(input_dir):
+    img_path = os.path.join(input_dir, img_name)
+    save_path = os.path.join(save_dir, img_name)
 
-#     image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
+    image = cv2.imread(img_path, cv2.IMREAD_GRAYSCALE)
 
-#     ## 執行自適應冪律轉換
-#     aplt_image = adaptive_power_law_transform(image, window_size)
+    ## 執行自適應冪律轉換
+    aplt_image = adaptive_power_law_transform(image, window_size)
 
-#     cv2.imwrite(save_path, aplt_image)
-#     print("save: ", save_path)
+    cv2.imwrite(save_path, aplt_image)
+    # print("save: ", save_path)
