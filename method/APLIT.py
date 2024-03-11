@@ -76,8 +76,9 @@ def aplit(image):
 # cv2.destroyAllWindows()
 '''----------------------------------------------------------------------------------------'''
 # original size (t_thr, s_thr)
-save_dir = r"tooth\APLIT"
-input_dir = r"tooth\images"
+
+input_dir = r"C:\Users\user\Desktop\dataset\periapical film\good tooth"
+save_dir = r"C:\Users\user\Desktop\dataset\periapical film\good tooth APLIT"
 os.makedirs(save_dir, exist_ok=True)
 
 for img_name in os.listdir(input_dir):
